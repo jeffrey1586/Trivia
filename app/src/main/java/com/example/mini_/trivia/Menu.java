@@ -21,6 +21,8 @@ public class Menu extends AppCompatActivity{
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(Menu.this, GamePlay.class);
+            intent.putExtra("count", 0);
+            intent.putExtra("score", 0);
             startActivity(intent);
         }
     }

@@ -29,7 +29,9 @@ public class GamePlayQuestions extends AppCompatActivity implements Response.Err
     private Spinner spinner;
     String[] items;
     int answer_confirm;
-    JSONObject jsonObj;
+    String check;
+    int count;
+    int score;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +84,10 @@ public class GamePlayQuestions extends AppCompatActivity implements Response.Err
                     @Override
                     public void onClick(View v) {
                         String answer_given = spinner.getSelectedItem().toString();
+                        Intent score_intent = getIntent();
+                        score = score_intent.getIntExtra("score", 110);
                         if (answer_given == correctAnswer) {
+                            score += 10;
                             openActivity_next();
                         }
                         else {
@@ -99,12 +104,28 @@ public class GamePlayQuestions extends AppCompatActivity implements Response.Err
     }
     // this method is prompt to convert the title and the user to the next activity
     public void openActivity_next() {
-        Intent intent = new Intent(GamePlayQuestions.this, GamePlay.class);
-        String url = "https://ide50-chongejonge.cs50.io:8080/trivia";
-        RequestQueue queue = Volley.newRequestQueue(this);
-        PostRequest request = new PostRequest(Request.Method.POST, url, this, this);
-        queue.add(request);
-        startActivity(intent);
+
+        Intent intent = getIntent();
+        count = intent.getIntExtra("count", 11);
+        count += 1;
+
+        if (count < 7) {
+            Intent proceed_intent = new Intent(GamePlayQuestions.this, GamePlay.class);
+            proceed_intent.putExtra("count", count);
+            proceed_intent.putExtra("score", score);
+            startActivity(proceed_intent);
+        }
+
+        else if (count == 7){
+            String url = "https://ide50-chongejonge.cs50.io:8080/trivia";
+            RequestQueue queue = Volley.newRequestQueue(this);
+            String highScore = String.valueOf(score);
+            PostRequest request = new PostRequest(Request.Method.POST, url, this, this, highScore);
+            queue.add(request);
+
+            Intent done_intent = new Intent(GamePlayQuestions.this, HighScores.class);
+            startActivity(done_intent);
+        }
     }
 
     @Override
