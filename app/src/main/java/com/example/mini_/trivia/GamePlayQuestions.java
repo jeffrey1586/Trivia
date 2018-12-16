@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class GamePlayQuestions extends AppCompatActivity implements Response.ErrorListener, Response.Listener<String> {
+public class GamePlayQuestions extends AppCompatActivity {
 
     private Spinner spinner;
     String[] items;
@@ -90,7 +90,7 @@ public class GamePlayQuestions extends AppCompatActivity implements Response.Err
                             score += 10;
                             openActivity_next();
                         }
-                        else {
+                        else if (answer_given != "") {
                             openActivity_next();
                         }
                     }
@@ -109,31 +109,18 @@ public class GamePlayQuestions extends AppCompatActivity implements Response.Err
         count = intent.getIntExtra("count", 11);
         count += 1;
 
-        if (count < 7) {
+        if (count < 8) {
             Intent proceed_intent = new Intent(GamePlayQuestions.this, GamePlay.class);
             proceed_intent.putExtra("count", count);
             proceed_intent.putExtra("score", score);
             startActivity(proceed_intent);
         }
 
-        else if (count == 7){
-            String url = "https://ide50-chongejonge.cs50.io:8080/trivia";
-            RequestQueue queue = Volley.newRequestQueue(this);
+        else if (count == 8){
+            Intent done_intent = new Intent(GamePlayQuestions.this, PreHighScore.class);
             String highScore = String.valueOf(score);
-            PostRequest request = new PostRequest(Request.Method.POST, url, this, this, highScore);
-            queue.add(request);
-
-            Intent done_intent = new Intent(GamePlayQuestions.this, HighScores.class);
+            done_intent.putExtra("score", highScore);
             startActivity(done_intent);
         }
-    }
-
-    @Override
-    public void onErrorResponse(VolleyError error) {
-    }
-
-    @Override
-    public void onResponse(String response) {
-
     }
 }

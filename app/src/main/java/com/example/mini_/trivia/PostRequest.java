@@ -13,17 +13,21 @@ import java.util.Map;
 */
 public class PostRequest extends StringRequest  {
     String final_points;
+    String final_username;
     // Constructor
-    public PostRequest(int method, String url, Response.Listener<String> listener, Response.ErrorListener errorListener, String points) {
+    public PostRequest(int method, String url, Response.Listener<String> listener,
+                       Response.ErrorListener errorListener, String username, String points) {
         super(method, url, listener, errorListener);
         final_points = points;
+        final_username = username;
     }
 
     // Method to supply parameters to the request
     @Override
     protected Map<String, String> getParams() {
         Map<String, String> params = new HashMap<>();
-        params.put("User", final_points);
+        params.put("username", final_username);
+        params.put("points", final_points);
         return params;
     }
 }

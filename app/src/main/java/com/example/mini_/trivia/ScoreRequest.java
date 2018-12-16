@@ -39,15 +39,17 @@ public class ScoreRequest implements Response.Listener<JSONArray>, Response.Erro
 
     @Override
     public void onResponse(JSONArray response) {
-        for (int i = 0; i < response.length(); i++) {
+        for (int i = 0; i < (response.length() + 1); i++) {
             try {
                 JSONObject scoreInfo = response.getJSONObject(i);
-                String high_score = scoreInfo.getString("User");
-                array.add(high_score);
+                String username = scoreInfo.getString("username");
+                String high_score = scoreInfo.getString("points");
+                array.add(username + ": " + high_score);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
+        System.out.println("helloo" + array);
         theActivity.gotQuestion(array);
     }
 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mini_.trivia">
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -19,7 +20,8 @@
         </activity>
         <activity android:name=".GamePlay" />
         <activity android:name=".GamePlayQuestions" />
-        <activity android:name=".HighScores"></activity>
+        <activity android:name=".HighScores" />
+        <activity android:name=".PreHighScore"></activity>
     </application>
 
 </manifest>
