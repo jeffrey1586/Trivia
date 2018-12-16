@@ -35,8 +35,6 @@ public class GamePlay extends AppCompatActivity implements GameRequest.Callback{
         counts_left -= count;
         TextView counter = findViewById(R.id.count_text);
         counter.setText(counts_left + " questions to go!");
-        System.out.println("hallooinitC: " + count);
-        System.out.println("hallooinitS: " + score);
     }
 
     private class SelectItemClickListener implements AdapterView.OnItemClickListener {
