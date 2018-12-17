@@ -38,16 +38,20 @@ public class GamePlayQuestions extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_play_questions);
 
+        // get the selected question
         Intent intent = getIntent();
         QuestionItem selectedItem = (QuestionItem) intent.getSerializableExtra("selected_item");
 
         TextView question = findViewById(R.id.question_text);
         TextView category = findViewById(R.id.category_text);
+
+        // get question information
         String questionInfo = selectedItem.getQuestion();
         String categoryInfo = selectedItem.getCategory();
         question.setText(questionInfo);
         category.setText("Category: " + categoryInfo);
 
+        // get question answers
         final String correctAnswer = selectedItem.getCorrect_answer();
         String incorrectAnswer1 = selectedItem.getFirst();
         String incorrectAnswer2 = selectedItem.getSecond();
@@ -109,6 +113,7 @@ public class GamePlayQuestions extends AppCompatActivity {
         count = intent.getIntExtra("count", 11);
         count += 1;
 
+        // keep track of score and question count and let user choose new category
         if (count < 8) {
             Intent proceed_intent = new Intent(GamePlayQuestions.this, GamePlay.class);
             proceed_intent.putExtra("count", count);
@@ -116,6 +121,7 @@ public class GamePlayQuestions extends AppCompatActivity {
             startActivity(proceed_intent);
         }
 
+        // all questions are answered ga to the username prompt
         else if (count == 8){
             Intent done_intent = new Intent(GamePlayQuestions.this, PreHighScore.class);
             String highScore = String.valueOf(score);

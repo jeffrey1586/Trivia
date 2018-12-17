@@ -25,6 +25,7 @@ public class PostRequest extends StringRequest  {
     // Method to supply parameters to the request
     @Override
     protected Map<String, String> getParams() {
+        // make hash map with username and points scored
         Map<String, String> params = new HashMap<>();
         params.put("username", final_username);
         params.put("points", final_points);

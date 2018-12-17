@@ -45,6 +45,7 @@ public class GameRequest implements Response.Listener<JSONObject>, Response.Erro
             e.printStackTrace();
         }
 
+        // get all the information about the questions
         for (int i = 0; i < QuestionArray.length(); i++) {
             try {
                 JSONObject questionInfo = QuestionArray.getJSONObject(i);
@@ -73,6 +74,7 @@ public class GameRequest implements Response.Listener<JSONObject>, Response.Erro
 
         theActivity = activity;
 
+        // start a connection with a JsonObjectRequest and an url
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 ("https://opentdb.com/api.php?amount=10", null, this, this);
         queue.add(jsonObjectRequest);

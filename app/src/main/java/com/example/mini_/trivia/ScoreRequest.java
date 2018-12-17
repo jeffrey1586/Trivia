@@ -39,6 +39,7 @@ public class ScoreRequest implements Response.Listener<JSONArray>, Response.Erro
 
     @Override
     public void onResponse(JSONArray response) {
+        // get the username and points of each saved player
         for (int i = 0; i < (response.length() + 1); i++) {
             try {
                 JSONObject scoreInfo = response.getJSONObject(i);
@@ -49,10 +50,10 @@ public class ScoreRequest implements Response.Listener<JSONArray>, Response.Erro
                 e.printStackTrace();
             }
         }
-        System.out.println("helloo" + array);
         theActivity.gotQuestion(array);
     }
 
+    // make a request to the url with the username and score information
     public void getQuestionItem(com.example.mini_.trivia.ScoreRequest.Callback activity) {
         RequestQueue queue = Volley.newRequestQueue(context);
 

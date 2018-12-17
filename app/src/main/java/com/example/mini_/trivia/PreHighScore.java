@@ -22,9 +22,11 @@ public class PreHighScore extends AppCompatActivity implements Response.ErrorLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pre_high_score);
 
+        // connect click listener to OK button
         Button confirm = findViewById(R.id.username_confirm);
         confirm.setOnClickListener(new PreHighScore.ScoreListClickListener());
 
+        // get the score earned from the player
         Intent score_intent = getIntent();
         highScore = score_intent.getStringExtra("score");
     }
@@ -35,6 +37,7 @@ public class PreHighScore extends AppCompatActivity implements Response.ErrorLis
             TextView user_holder = findViewById(R.id.username_text);
             String username = user_holder.getText().toString();
 
+            // make a post request with username and high score to url
             if (username != "") {
                 String url = "https://ide50-chongejonge.cs50.io:8080/trivia";
                 RequestQueue queue = Volley.newRequestQueue(PreHighScore.this);

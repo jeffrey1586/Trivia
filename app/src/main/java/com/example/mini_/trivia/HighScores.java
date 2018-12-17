@@ -35,6 +35,7 @@ public class HighScores extends AppCompatActivity implements ScoreRequest.Callba
 
     @Override
     public void gotQuestion(ArrayList<String> scores) {
+        // show scores in the list view
         ListView lv = findViewById(R.id.score_values);
         ArrayAdapter adapter = new ArrayAdapter
                 (this, android.R.layout.simple_list_item_1, scores);
@@ -47,6 +48,7 @@ public class HighScores extends AppCompatActivity implements ScoreRequest.Callba
 
     @Override
     public void onBackPressed() {
+        // when back is pressed user will go to menu activity
         Intent toHomeScreen = new Intent(this, Menu.class);
         startActivity(toHomeScreen);
     }
