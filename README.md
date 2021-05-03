@@ -14,6 +14,7 @@ Extra:
 - The category activity (GamePlay.java), where you can choose the category of the question</br>
 - That activity also keeps track on how much questions you still have to answer
 (OnCreat: GamePlay.java)</br>
+Purpose: Course assignment basic app development in Android.</br>
 
 ![Screenshot](doc/Screenshot_Trivia.jpeg)
 ![Screenshot](doc/Screenshot_Trivia2.jpeg)
